@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       flash[:success] = "Item added to the tracker!"
-      redirect_to @item
+      redirect_to index_path
     else
       render "new"
     end
@@ -37,6 +37,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    Item.find(params[:id]).destroy
+    flash[:success] = "Item Deleted"
+    redirect_to index_path
   end
 
   private

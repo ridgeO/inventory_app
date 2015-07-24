@@ -1,29 +1,33 @@
 <%= provide(:title, "Index") %>
 <div class="container">
-  <div class="jumbotron">
-    <h1>City Name</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Holder</th>
-          <th>Due</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @items.each do |item| %>
-        <tr>
-          <td><%= link_to item.name, item%></td>
-          <td><%= item.description %></td>
-          <td><%= item.status %></td>
-          <td><%= item.holder %></td>
-          <td><%= item.due %></td>
-        </tr>
+  <h1>City Name</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Holder</th>
+        <th>Due</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item%></td>
+        <td><%= item.description %></td>
+        <td><%= item.status %></td>
+        <td><%= item.holder %></td>
+        <td><%= item.due %></td>
+        <% if item.status == "In" %>
+          <td><%= link_to "Check Out", "#" %>
+        <% else %>
+          <td><%= link_to "Check In", "#" %>
         <% end %>
-      </tbody>
-    </table>
-    <p><%= link_to "+ Add New Item", new_path %></p>
-  </div>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= link_to "+ Add New Item", new_path %></p>
 </div>

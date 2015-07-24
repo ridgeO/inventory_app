@@ -1,12 +1,14 @@
 <%= provide(:title, "New Item")%>
-<h1>Add Item to Inventory</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@item) do |f| %>
-      <%= render "shared/error_messages" %>
-      <%= render "items/fields", f: f %>
-      <%= f.submit "Add Item to Tracker", class: "btn btn-primary" %>
-    <% end %>
+<div class="container">
+  <h1>Add Item to Inventory</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@item) do |f| %>
+        <%= render "shared/error_messages" %>
+        <%= render "items/fields", f: f %>
+        <br>
+        <%= f.submit "Add Item to Tracker", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
