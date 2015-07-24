@@ -21,9 +21,9 @@
         <td><%= item.holder %></td>
         <td><%= item.due %></td>
         <% if item.status == "In" %>
-          <td><%= link_to "Check Out", "#" %>
+          <td><%= link_to "Check Out", "items/#{item.id}/checkout" %>
         <% else %>
-          <td><%= link_to "Check In", "#" %>
+          <td><%= link_to "Check In", "items/#{item.id}/checkin", :method => :post %>
         <% end %>
       </tr>
       <% end %>
