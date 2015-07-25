@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validates :name, presence: true, length: {maximum: 50}
   validates :description, length: {maximum:255}
-  validates :picture_size
+  validate :picture_size
 
   private
   # Validates the size of an uploaded picture
