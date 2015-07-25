@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+# Declare Ruby version for Heroku
+ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 # Use OmniAuth for authentication
