@@ -5,6 +5,12 @@ ruby '2.2.1'
 gem 'rails', '4.2.2'
 # Use OmniAuth for authentication
 gem "omniauth-google-oauth2"
+# Use Carrierwave for image upload functionality
+gem 'carrierwave',  '0.10.0'
+# Use MiniMagick to control image size when uploaded
+gem 'mini_magick',  '3.8.0'
+# Use Fog to link image upload to AWS in production
+gem 'fog',          '1.23.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

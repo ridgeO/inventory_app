@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :logged_in
+  # before_action :logged_in
 
   def index
     @items = Item.order(name: :asc)
