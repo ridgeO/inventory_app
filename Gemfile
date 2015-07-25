@@ -46,6 +46,4 @@ group :production do
   gem 'pg', '0.17.1'
   # Used by Heroku to serve static assets
   gem 'rails_12factor', '0.0.2'
-  # Use Puma server to run on Heroku
-  gem 'puma', '2.11.1'
 end
