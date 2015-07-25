@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :logged_in
 
   def index
-    @items = Item.all
+    @items = Item.order(name: :asc)
   end
 
   def show
