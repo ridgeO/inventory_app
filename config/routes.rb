@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "pages#main"
+  root "pages#home"
   get "new" => "items#new"
   get "index" => "items#index"
   get "edit" => "items#edit"
