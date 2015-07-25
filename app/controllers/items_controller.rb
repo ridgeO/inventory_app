@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :logged_in
 
   def index
     @items = Item.all
@@ -71,6 +72,13 @@ class ItemsController < ApplicationController
 
     def item_params
       params.require(:item).permit(:name, :description, :image, :status, :holder, :due)
+    end
+
+    def logged_in
+      if current_user.nil?
+        redirect_to root_path
+        flash[:danger] = "Please log in before continuing."
+      end
     end
 
 end
