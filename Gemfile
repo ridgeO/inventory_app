@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+  # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -45,4 +45,6 @@ group :production do
   gem 'pg', '0.17.1'
   # Used by Heroku to serve static assets
   gem 'rails_12factor', '0.0.2'
+  # Use Puma server to run on Heroku
+  gem 'puma', '2.11.1'
 end
