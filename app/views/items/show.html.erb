@@ -8,6 +8,17 @@
     <span><%= @item.description %></span>
   </p>
   <p>
+    <span><%= "Status: #{@item.status}" %></span>
+  </p>
+  <% if @item.status != "In" %>
+    <p>
+      <span><%= "Holder: #{@item.holder}" %></span>
+    </p>
+    <p>
+      <span><%= "Due: #{@item.due}" %></span>
+    </p>
+  <% end %>
+  <p>
     <span><%= link_to "Edit Item", edit_item_path(@item) %></span>
     <span> | </span>
     <span><%= link_to "Delete Item", @item, method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
