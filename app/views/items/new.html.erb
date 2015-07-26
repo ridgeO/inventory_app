@@ -3,7 +3,7 @@
   <h1>Add Item to Inventory</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_for(@item) do |f| %>
+      <%= form_for(@item, html: { multipart: true }) do |f| %>
         <%= render "shared/error_messages" %>
         <%= render "items/fields", f: f %>
         <br>
