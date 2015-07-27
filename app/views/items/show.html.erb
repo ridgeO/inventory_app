@@ -15,7 +15,7 @@
       <span><%= "Holder: #{@item.holder}" %></span>
     </p>
     <p>
-      <span><%= "Due: #{@item.due}" %></span>
+      <span><%= "Due: #{@item.due.strftime('%a %d %b')}" %></span>
     </p>
   <% end %>
   <p>

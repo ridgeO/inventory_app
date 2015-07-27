@@ -19,7 +19,7 @@
         <td><%= item.description %></td>
         <td><%= item.status %></td>
         <td><%= item.holder %></td>
-        <td><%= item.due %></td>
+        <td><%= item.due.strftime('%a %d %b') %></td>
         <% if item.status == "In" %>
           <td><%= link_to "Check Out", "items/#{item.id}/checkout" %>
         <% else %>
