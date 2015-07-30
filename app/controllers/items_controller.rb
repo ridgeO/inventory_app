@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :logged_in
+  #before_action :logged_in
 
   def index
     @items = Item.order(name: :asc)
@@ -31,14 +31,14 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if item_params[:holder].present?
       if @item.update_attributes(item_params)
-        flash[:success] = "Checked out!"
+        flash[:success] = "#{@item.name} checked out!"
         redirect_to index_path
       else
         render "checkout"
       end
     else
       if @item.update_attributes(item_params)
-        flash[:success] = "Item updated!"
+        flash[:success] = "#{@item.name} updated!"
         redirect_to @item
       else
         render "edit"

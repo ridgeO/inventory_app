@@ -6,6 +6,7 @@
       <%= form_for(@item, html: { multipart: true }) do |f| %>
         <%= render "shared/error_messages" %>
         <%= render "items/fields", f: f %>
+        <%= f.hidden_field :status, :value => "In" %>
         <br>
         <%= f.submit "Add Item to Tracker", class: "btn btn-primary" %>
       <% end %>

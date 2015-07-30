@@ -8,14 +8,14 @@
     <span><%= @item.description %></span>
   </p>
   <p>
-    <span><%= "Status: #{@item.status}" %></span>
+    <span><b>Status: </b><%= "#{@item.status}" %></span>
   </p>
   <% if @item.status != "In" %>
     <p>
-      <span><%= "Holder: #{@item.holder}" %></span>
+      <span><b>Holder: </b><%= "#{@item.holder}" %></span>
     </p>
     <p>
-      <span><%= "Due: #{@item.due}" %></span>
+      <span><b>Due: </b><%= "#{@item.due.to_s(format= :long)}" %></span>
     </p>
   <% end %>
   <p>

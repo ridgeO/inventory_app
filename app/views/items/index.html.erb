@@ -19,7 +19,11 @@
         <td><%= item.description %></td>
         <td><%= item.status %></td>
         <td><%= item.holder %></td>
-        <td><%= item.due.to_s(format = :long) %></td>
+        <% unless item.due.nil? %>
+          <td><%= item.due.to_s(format= :long) %></td>
+        <% else %>
+          <td><%= item.due %></td>
+        <% end %>
         <% if item.status == "In" %>
           <td><%= link_to "Check Out", "items/#{item.id}/checkout" %>
         <% else %>
