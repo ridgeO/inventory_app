@@ -8,16 +8,31 @@
     <span><%= @item.description %></span>
   </p>
   <p>
-    <span><b>Status: </b><%= "#{@item.status}" %></span>
+    <span><b>Status: </b><%= "#{Status.where(item_num: @item.id).last.name}" %></span>
   </p>
-  <% if @item.status != "In" %>
+  <% if Status.where(item_num: @item.id).last.name != "In" %>
     <p>
-      <span><b>Holder: </b><%= "#{@item.holder}" %></span>
+      <span><b>Holder: </b><%= "#{Status.where(item_num: @item.id).last.holder}" %></span>
     </p>
     <p>
-      <span><b>Due: </b><%= "#{@item.due.to_s(format= :long)}" %></span>
+      <span><b>Due: </b><%= "#{Status.where(item_num: @item.id).last.due.to_s(format= :long)}" %></span>
     </p>
   <% end %>
+  <p>History</p>
+  <table>
+    <tr>
+      <th>Holder</th>
+      <th>Due</th>
+    </tr>
+    <tbody>
+    <% Status.where(item_num: @item.id, name: "Out").each do |status| %>
+      <tr>
+        <td><%= status.holder %></td>
+        <td><%= status.due %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
   <p>
     <span><%= link_to "Edit Item", edit_item_path(@item) %></span>
     <span> | </span>

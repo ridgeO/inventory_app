@@ -17,7 +17,15 @@
       <tr>
         <td><%= link_to item.name, item%></td>
         <td><%= item.description %></td>
-        <td><%= item.statuses %></td>
+        <td><%= Status.where(item_num: item.id).last.name %></td>
+        <td><%= Status.where(item_num: item.id).last.holder %></td>
+        <% unless Status.where(item_num: item.id).last.due.nil? %>
+          <td><%= (Status.where(item_num: item.id).last.due).to_s(:long) %></td>
+          <td><%= link_to "Check In", "items/#{item.id}/checkin" %></td>
+        <% else %>
+          <td></td>
+          <td><%= link_to "Check Out", "items/#{item.id}/checkout" %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

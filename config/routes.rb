@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "edit" => "items#edit"
   get "items/:id/checkin" => "statuses#checkin"
   get "items/:id/checkout" => "statuses#checkout"
+  get "create" => "statuses#create"
   get "/auth/google_oauth2/callback" => "sessions#create"
   delete "/logout" => "sessions#destroy"
   resources :items

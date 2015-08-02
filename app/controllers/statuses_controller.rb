@@ -3,8 +3,12 @@ class StatusesController < ApplicationController
   def checkin
     @item = Item.find(params[:id])
     @status = Status.new(item_num: @item.id, name: "In", holder: nil, due: nil)
-    @status.save
-    redirect_to index_path
+    if @status.save
+      flash[:success] = "#{@item.name} checked in!"
+      redirect_to index_path
+    else
+    render index_path
+    end
   end
 
   def checkout
@@ -14,9 +18,9 @@ class StatusesController < ApplicationController
 
   def create
     @status = Status.new(status_params)
-    @item = Item.find(status_params[:item_num]).name
+    @item = Item.find(status_params[:item_num])
     if @status.save
-      flash[:success] = "#{@item} checked out!"
+      flash[:success] = "#{@item.name} checked out!"
       redirect_to index_path
     else
       render "statuses/checkout"

@@ -11,11 +11,13 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @status = Status.new
   end
 
   def create
     @item = Item.new(item_params)
     if @item.save
+      @status = Status.new(item_num: @item.id, name: "In", holder: nil, due: nil).save
       flash[:success] = "Item added to the tracker!"
       redirect_to index_path
     else
@@ -25,6 +27,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @status = Status.where(item_num: @item.id).last
   end
 
   def update
