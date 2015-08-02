@@ -5,9 +5,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :image
-      t.string :status
-      t.string :holder
-      t.date :due
+      t.integer :location
       t.timestamps null: false
     end
   end

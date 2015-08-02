@@ -1,0 +1,19 @@
+<%= provide(:title, "Checkout Item") %>
+<div class="container">
+  <h1><%= "Checkout: #{@item.name}"%></h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@status) do |f| %>
+        <%= render 'shared/error_messages' %>
+        <%= f.label :holder %>
+        <%= f.text_field :holder, class: 'form-control' %>
+        <%= f.label :due %>
+        <%= f.date_field :due, class: 'form-control' %>
+        <%= f.hidden_field :item_num, :value => @item.id %>
+        <%= f.hidden_field :name, :value => "Out" %>
+        <br>
+        <%= f.submit "Save Edits", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

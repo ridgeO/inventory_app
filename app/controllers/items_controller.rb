@@ -29,20 +29,11 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if item_params[:holder].present?
-      if @item.update_attributes(item_params)
-        flash[:success] = "#{@item.name} checked out!"
-        redirect_to index_path
-      else
-        render "checkout"
-      end
+    if @item.update_attributes(item_params)
+      flash[:success] = "#{@item.name} updated!"
+      redirect_to @item
     else
-      if @item.update_attributes(item_params)
-        flash[:success] = "#{@item.name} updated!"
-        redirect_to @item
-      else
-        render "edit"
-      end
+      render "edit"
     end
   end
 
@@ -52,26 +43,10 @@ class ItemsController < ApplicationController
     redirect_to index_path
   end
 
-  def checkin
-    @item = Item.find(params[:id])
-    @item.status = "In"
-    @item.holder = nil
-    @item.due = nil
-    if @item.save
-      flash[:success] = "#{@item.name} checked in!"
-      redirect_to index_path
-    end
-  end
-
-  def checkout
-    @item = Item.find(params[:id])
-
-  end
-
   private
 
     def item_params
-      params.require(:item).permit(:name, :description, :image, :status, :holder, :due)
+      params.require(:item).permit(:name, :description, :image)
     end
 
     def logged_in
