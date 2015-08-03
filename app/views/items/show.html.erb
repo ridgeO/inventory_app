@@ -1,42 +1,44 @@
 <%= provide(:title, "#{@item.name}") %>
 <div class="container">
   <h1><%= @item.name %></h1>
-  <p>
-    <span><%= image_tag(@item.image, alt: @item.name) if @item.image?%></span>
-  </p>
-  <p>
-    <span><%= @item.description %></span>
-  </p>
-  <p>
-    <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
-  </p>
-  <% if Status.where(item_id: @item.id).last.name != "In" %>
+  <div class="panel-body">
     <p>
-      <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
+      <span><%= image_tag(@item.image, alt: @item.name) if @item.image?%></span>
     </p>
     <p>
-      <span><b>Due: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
+      <span><%= @item.description %></span>
     </p>
-  <% end %>
-  <p>History</p>
-  <table>
-    <tr>
-      <th>Holder</th>
-      <th>Due</th>
-    </tr>
-    <tbody>
-    <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
-      <tr>
-        <td><%= status.holder %></td>
-        <td><%= status.due %></td>
-      </tr>
+    <p>
+      <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
+    </p>
+    <% if Status.where(item_id: @item.id).last.name != "In" %>
+      <p>
+        <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
+      </p>
+      <p>
+        <span><b>Due: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
+      </p>
     <% end %>
-    </tbody>
-  </table>
-  <p>
-    <span><%= link_to "Edit Item", edit_location_item_path(@location.id, @item.id) %></span>
-    <span> | </span>
-    <span><%= link_to "Delete Item", location_item_path(@location.id, @item.id), method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
-  </p>
-  <p><span><%= link_to "Back to Inventory", location_path(@location.id) %></span></p>
+    <p>History</p>
+    <table>
+      <tr>
+        <th>Holder</th>
+        <th>Due</th>
+      </tr>
+      <tbody>
+      <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
+        <tr>
+          <td><%= status.holder %></td>
+          <td><%= status.due %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <p>
+      <span><%= link_to "Edit Item", edit_location_item_path(@location.id, @item.id) %></span>
+      <span> | </span>
+      <span><%= link_to "Delete Item", location_item_path(@location.id, @item.id), method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
+    </p>
+    <p><span><%= link_to "Back to Inventory", location_path(@location.id) %></span></p>
+  </div>
 </div>
