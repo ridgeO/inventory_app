@@ -6,15 +6,13 @@
       <tr>
         <th>Name</th>
         <th>Items</th>
-        <th>Utilization</th>
-        <th>Admin</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @locations.each do |location| %>
       <tr>
         <td><%= link_to location.name, location%></td>
+        <td><%= Item.where(location_id: location.id).count %></td>
       </tr>
       <% end %>
     </tbody>
