@@ -4,18 +4,6 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <%= form_for([@location, @item, @status]) do |f| %>
-        <% if @status.errors.any? %>
-        <div id="error_explanation">
-          <div class="alert alert-danger">
-            The form contains <%= pluralize(@status.errors.count, "error") %>.
-          </div>
-          <ul>
-          <% @status.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
-        <% end %>
         <%= f.label :holder %>
         <%= f.text_field :holder, class: 'form-control' %>
         <%= f.label :due %>

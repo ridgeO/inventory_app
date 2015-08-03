@@ -24,7 +24,8 @@ class StatusesController < ApplicationController
       flash[:success] = "#{@item.name} checked out!"
       redirect_to location_path(@item.location)
     else
-      render "checkout"
+      flash[:danger] = "Something went wrong. Please try again."
+      redirect_to location_item_checkout_path
     end
   end
 

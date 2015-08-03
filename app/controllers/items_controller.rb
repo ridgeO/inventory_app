@@ -24,7 +24,8 @@ class ItemsController < ApplicationController
       flash[:success] = "#{@item.name} added to the tracker!"
       redirect_to location_path(@item.location_id)
     else
-      render "new"
+      flash[:danger] = "Something went wrong. Please try again."
+      redirect_to new_location_item_path
     end
   end
 
@@ -41,13 +42,14 @@ class ItemsController < ApplicationController
       flash[:success] = "#{@item.name} updated!"
       redirect_to location_item_path(@location.id, @item.id)
     else
-      render "edit"
+      flash[:danger] = "Something went wrong. Please try again."
+      redirect_to edit_location_item_path
     end
   end
 
   def destroy
     Item.find(params[:id]).destroy
-    flash[:success] = "Item Deleted"
+    flash[:success] = "Item deleted"
     redirect_to location_path(params[:location_id])
   end
 
