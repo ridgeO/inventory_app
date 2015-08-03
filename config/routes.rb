@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
   root "pages#home"
-  get "locations/:id/items/new" => "items#new"
-  get "locations/:id/items/" => "items#index"
-  get "edit" => "items#edit"
-  get "items/:id/checkin" => "statuses#checkin"
-  get "items/:id/checkout" => "statuses#checkout"
-  get "create" => "statuses#create"
   get "/auth/google_oauth2/callback" => "sessions#create"
   delete "/logout" => "sessions#destroy"
-  resources :items
-  resources :statuses
-  resources :locations
+  post "/locations/:location_id/items/new" => "items#create"
+  post "/locations/:location_id/items/:id/edit" => "items#update"
+  resources :locations do
+    resources :items do
+      resources :statuses
+      get "checkin" => "statuses#checkin", :as => "checkin"
+      get "checkout" => "statuses#checkout", :as => "checkout"
+    end
+  end
 
 end

@@ -34,9 +34,9 @@
     </tbody>
   </table>
   <p>
-    <span><%= link_to "Edit Item", edit_item_path(@item) %></span>
+    <span><%= link_to "Edit Item", edit_location_item_path(@location.id, @item.id) %></span>
     <span> | </span>
-    <span><%= link_to "Delete Item", @item, method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
+    <span><%= link_to "Delete Item", location_item_path(@location.id, @item.id), method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
   </p>
-  <p><span><%= link_to "Back to Inventory", "locations/:id/items" %></span></p>
+  <p><span><%= link_to "Back to Inventory", location_path(@location.id) %></span></p>
 </div>
