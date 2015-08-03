@@ -9,7 +9,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       flash[:success] = "#{@location.name} added to the tracker!"
-      redirect_to index_path
+      redirect_to @location
     else
       render "locations/new"
     end
@@ -21,6 +21,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @items = Item.where(location_id: @location.id)
   end
 
   def edit

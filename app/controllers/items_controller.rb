@@ -19,9 +19,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      @status = Status.new(item_num: @item.id, name: "In", holder: nil, due: nil).save
-      flash[:success] = "Item added to the tracker!"
-      redirect_to "locations/#{@item.location}/items"
+      @status = Status.new(item_id: @item.id, name: "In", holder: nil, due: nil).save
+      flash[:success] = "#{@item.name} added to the tracker!"
+      redirect_to "/locations/#{@item.location_id}/items"
     else
       render "new"
     end
@@ -45,13 +45,13 @@ class ItemsController < ApplicationController
   def destroy
     Item.find(params[:id]).destroy
     flash[:success] = "Item Deleted"
-    redirect_to index_path
+    redirect_to "locations/"
   end
 
   private
 
     def item_params
-      params.require(:item).permit(:name, :description, :image, :location)
+      params.require(:item).permit(:name, :description, :image, :location_id)
     end
 
     def logged_in

@@ -2,7 +2,7 @@ class StatusesController < ApplicationController
 
   def checkin
     @item = Item.find(params[:id])
-    @status = Status.new(item_num: @item.id, name: "In", holder: nil, due: nil)
+    @status = Status.new(item_id: @item.id, name: "In", holder: nil, due: nil)
     if @status.save
       flash[:success] = "#{@item.name} checked in!"
       redirect_to index_path
@@ -18,7 +18,7 @@ class StatusesController < ApplicationController
 
   def create
     @status = Status.new(status_params)
-    @item = Item.find(status_params[:item_num])
+    @item = Item.find(status_params[:item_id])
     if @status.save
       flash[:success] = "#{@item.name} checked out!"
       redirect_to index_path
@@ -30,7 +30,7 @@ class StatusesController < ApplicationController
   private
 
   def status_params
-    params.require(:status).permit(:item_num, :name, :holder, :due)
+    params.require(:status).permit(:item_id, :name, :holder, :due)
   end
 
 end

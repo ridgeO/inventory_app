@@ -1,2 +1,33 @@
-<h1><%= @location.name %></h1>
-<p><%= "Info about #{@location.name}" %></p>
+<div class="container">
+  <h1><%= @location.name %></h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Holder</th>
+        <th>Due</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item%></td>
+        <td><%= item.description %></td>
+        <td><%= Status.where(item_id: item.id).last.name %></td>
+        <td><%= Status.where(item_id: item.id).last.holder %></td>
+        <% unless Status.where(item_id: item.id).last.due.nil? %>
+          <td><%= (Status.where(item_id: item.id).last.due).to_s(:long) %></td>
+          <td><%= link_to "Check In", "items/#{item.id}/checkin" %></td>
+        <% else %>
+          <td></td>
+          <td><%= link_to "Check Out", "items/#{item.id}/checkout" %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= link_to "+ Add New Item", "/locations/#{@location.id}/items/new" %></p>
+</div>

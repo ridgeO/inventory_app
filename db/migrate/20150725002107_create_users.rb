@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider, null: false
       t.string :uid, null: false
       t.string :name
-      t.integer :location
+      t.integer :location_id
       t.string :image_url
       t.boolean :admin
       t.boolean :super_admin

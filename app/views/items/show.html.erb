@@ -8,14 +8,14 @@
     <span><%= @item.description %></span>
   </p>
   <p>
-    <span><b>Status: </b><%= "#{Status.where(item_num: @item.id).last.name}" %></span>
+    <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
   </p>
-  <% if Status.where(item_num: @item.id).last.name != "In" %>
+  <% if Status.where(item_id: @item.id).last.name != "In" %>
     <p>
-      <span><b>Holder: </b><%= "#{Status.where(item_num: @item.id).last.holder}" %></span>
+      <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
     </p>
     <p>
-      <span><b>Due: </b><%= "#{Status.where(item_num: @item.id).last.due.to_s(format= :long)}" %></span>
+      <span><b>Due: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
     </p>
   <% end %>
   <p>History</p>
@@ -25,7 +25,7 @@
       <th>Due</th>
     </tr>
     <tbody>
-    <% Status.where(item_num: @item.id, name: "Out").each do |status| %>
+    <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
       <tr>
         <td><%= status.holder %></td>
         <td><%= status.due %></td>
@@ -38,5 +38,5 @@
     <span> | </span>
     <span><%= link_to "Delete Item", @item, method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
   </p>
-  <p><span><%= link_to "Back to Inventory", index_path %></span></p>
+  <p><span><%= link_to "Back to Inventory", "locations/:id/items" %></span></p>
 </div>

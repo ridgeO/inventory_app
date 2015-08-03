@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :image
-      t.integer :location
+      t.integer :location_id
       t.timestamps null: false
     end
   end
