@@ -30,4 +30,10 @@
     </tbody>
   </table>
   <p><%= link_to "+ Add New Item", new_location_item_path(@location.id) %></p>
+  <h1>Import CSV</h1>
+  <%= form_tag import_location_items_path(params[:id]), multipart: true do %>
+    <%= file_field_tag :file %>
+    <br>
+    <%= submit_tag "Import" %>
+  <% end %>
 </div>

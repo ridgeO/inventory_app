@@ -53,6 +53,17 @@ class ItemsController < ApplicationController
     redirect_to location_path(params[:location_id])
   end
 
+  def import
+    @location = Location.find(params[:location_id])
+    if Item.import(params[:file])
+      flash[:success] = "Items imported!"
+      redirect_to location_path(@location.id)
+    else
+      flash[:danger] = "Something went wrong. Check your file and try again."
+      redirect_to location_path(@location.id)
+    end
+  end
+
   private
 
     def item_params

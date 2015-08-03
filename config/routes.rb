@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "/locations/:location_id/items/:id/edit" => "items#update"
   resources :locations do
     resources :items do
+      collection {post :import}
       resources :statuses
       get "checkin" => "statuses#checkin", :as => "checkin"
       get "checkout" => "statuses#checkout", :as => "checkout"

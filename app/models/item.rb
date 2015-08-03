@@ -7,6 +7,13 @@ class Item < ActiveRecord::Base
   validates :description, length: {maximum:255}
   validate :image_size
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      @item = Item.create! row.to_hash
+      Status.create!(item_id: @item.id, name: "In", holder: nil, due: nil)
+    end
+  end
+
   private
   # Validates the size of an uploaded picture
   def image_size
