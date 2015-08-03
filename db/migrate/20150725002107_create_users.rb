@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.integer :location
       t.string :image_url
+      t.boolean :admin
+      t.boolean :super_admin
       t.timestamps null: false
     end
     add_index :users, :provider

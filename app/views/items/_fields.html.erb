@@ -7,6 +7,8 @@
 <%= f.label :image %>
 <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
 
+<%= f.hidden_field :location, :value => @location.id %>
+
 <script type="text/javascript">
 $('#item_image').bind('change', function(){
   var size_in_megabytes = this.files[0].size/1024/1024;

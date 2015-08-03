@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   root "pages#home"
-  get "new" => "items#new"
-  get "index" => "items#index"
+  get "locations/:id/items/new" => "items#new"
+  get "locations/:id/items/" => "items#index"
   get "edit" => "items#edit"
   get "items/:id/checkin" => "statuses#checkin"
   get "items/:id/checkout" => "statuses#checkout"
@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
   resources :items
   resources :statuses
+  resources :locations
 
 end

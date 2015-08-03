@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order(name: :asc)
+    @location = Location.find(params[:id])
   end
 
   def show
@@ -12,6 +13,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @status = Status.new
+    @location = Location.find(params[:id])
   end
 
   def create
@@ -19,7 +21,7 @@ class ItemsController < ApplicationController
     if @item.save
       @status = Status.new(item_num: @item.id, name: "In", holder: nil, due: nil).save
       flash[:success] = "Item added to the tracker!"
-      redirect_to index_path
+      redirect_to "locations/#{@item.location}/items"
     else
       render "new"
     end
@@ -49,7 +51,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:item).permit(:name, :description, :image)
+      params.require(:item).permit(:name, :description, :image, :location)
     end
 
     def logged_in
