@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :locations do
     resources :items do
       collection {post :import}
-      resources :statuses
+      resources :statuses, only: [:create]
       get "checkin" => "statuses#checkin", :as => "checkin"
       get "checkout" => "statuses#checkout", :as => "checkout"
     end
