@@ -22,12 +22,14 @@
       <% end %>
       <h2>History</h2>
       <table class="table table-striped">
-        <tr>
-          <th>Holder</th>
-          <th>Checkout Date</th>
-          <th>Due Date</th>
-          <th>Days Out</th>
-        </tr>
+        <thead>
+          <tr>
+            <th>Holder</th>
+            <th>Checkout Date</th>
+            <th>Due Date</th>
+            <th>Days Out</th>
+          </tr>
+        </thead>
         <tbody>
         <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
           <tr>
