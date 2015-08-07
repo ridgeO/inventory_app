@@ -1,3 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
+
+.panel-body {
+  display: inline-flex;
+}
+
+.jumbotron {
+  text-align: center;
+}

@@ -2,24 +2,30 @@
 <div class="container">
   <h1><%= @item.name %></h1>
   <div class="panel-body">
-    <p>
+    <div>
       <span><%= image_tag(@item.image, alt: @item.name) if @item.image?%></span>
-    </p>
-    <p>
-      <span><b>Description: </b><%= @item.description %></span>
-    </p>
-    <p>
-      <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
-    </p>
-    <% if current_user.admin? %>
-      <% if Status.where(item_id: @item.id).last.name != "In" %>
-        <p>
-          <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
-        </p>
-        <p>
-          <span><b>Due: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
-        </p>
+    </div>
+    <div>
+      <p>
+        <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
+      </p>
+      <% if current_user.admin? %>
+        <% if Status.where(item_id: @item.id).last.name != "In" %>
+          <p>
+            <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
+          </p>
+          <p>
+            <span><b>Due Date: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
+          </p>
+        <% end %>
       <% end %>
+      <p>
+        <span><b>Description: </b><%= @item.description %></span>
+      </p>
+    </div>
+  </div>
+  <div>
+    <% if current_user.admin? %>
       <h2>History</h2>
       <table class="table table-striped">
         <thead>
@@ -34,8 +40,8 @@
         <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
           <tr>
             <td><%= status.holder %></td>
-            <td><%= status.created_at %></td>
-            <td><%= status.due %></td>
+            <td><%= status.created_at.to_date.to_s(:long) %></td>
+            <td><%= status.due.to_s(:long) %></td>
             <td><%= (status.due.to_date - status.created_at.to_date).to_i %></td>
           </tr>
         <% end %>
