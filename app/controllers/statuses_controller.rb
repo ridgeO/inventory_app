@@ -1,4 +1,5 @@
 class StatusesController < ApplicationController
+  before_action :logged_in
 
   def checkin
     @item = Item.find(params[:item_id])
@@ -19,13 +20,13 @@ class StatusesController < ApplicationController
 
   def create
     @status = Status.new(status_params)
+    @location = Location.find(params[:location_id])
     @item = Item.find(params[:item_id])
     if @status.save
       flash[:success] = "#{@item.name} checked out!"
-      redirect_to location_path(@item.location)
+      redirect_to location_path(@location)
     else
-      flash[:danger] = "Something went wrong. Please try again."
-      redirect_to location_item_checkout_path
+      render "statuses/checkout"
     end
   end
 

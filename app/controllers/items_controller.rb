@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  #before_action :logged_in
+  before_action :logged_in
 
   def index
     @location = Location.find(params[:location_id])
@@ -18,14 +18,14 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @location = Location.find(params[:location_id])
     @item = Item.new(item_params)
     if @item.save
       @status = Status.new(item_id: @item.id, name: "In", holder: nil, due: nil).save
       flash[:success] = "#{@item.name} added to the tracker!"
       redirect_to location_path(@item.location_id)
     else
-      flash[:danger] = "Something went wrong. Please try again."
-      redirect_to new_location_item_path
+      render "items/new"
     end
   end
 
@@ -42,8 +42,7 @@ class ItemsController < ApplicationController
       flash[:success] = "#{@item.name} updated!"
       redirect_to location_item_path(@location.id, @item.id)
     else
-      flash[:danger] = "Something went wrong. Please try again."
-      redirect_to edit_location_item_path
+      render "items/edit"
     end
   end
 

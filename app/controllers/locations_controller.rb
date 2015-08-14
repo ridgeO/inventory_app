@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  #before_action :logged_in
+  before_action :logged_in
 
   def new
     @location = Location.new
@@ -36,6 +36,12 @@ class LocationsController < ApplicationController
     else
       render "location/edit"
     end
+  end
+
+  def destroy
+    @location = Location.find(params[:id]).destroy
+    flash[:success] = "#{@location.name} and all associated items deleted"
+    redirect_to locations_path
   end
 
   private

@@ -1,8 +1,8 @@
 class Status < ActiveRecord::Base
   belongs_to :item
   validates :name, presence: true
-  validate :future_due
   validate :valid_email
+  validate :future_due
 
   private
 
