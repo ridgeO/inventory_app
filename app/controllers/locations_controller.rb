@@ -34,7 +34,7 @@ class LocationsController < ApplicationController
       flash[:success] = "#{@location.name} updated!"
       redirect_to @location
     else
-      render "location/edit"
+      render "locations/edit"
     end
   end
 

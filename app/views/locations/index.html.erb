@@ -6,7 +6,9 @@
       <tr>
         <th>Name</th>
         <th>Items</th>
-        <th></th>
+        <% if current_user.super_admin? %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -15,7 +17,7 @@
         <td><%= link_to location.name, location%></td>
         <td><%= Item.where(location_id: location.id).count %></td>
         <% if current_user.super_admin? %>
-          <td><%= link_to "Delete Location", location_path(location.id), method: :delete, data: {confirm: "Are you sure you want to delete #{location.name}? Note: this will also delete all of the items associated with the city."} %></td>
+          <td><%= link_to "Edit", edit_location_path(location.id) %> | <%= link_to "Delete", location_path(location.id), method: :delete, data: {confirm: "Are you sure you want to delete #{location.name}? Note: this will also delete all of the items associated with the city."} %></td>
         <% end %>
       </tr>
       <% end %>
