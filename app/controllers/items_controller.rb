@@ -69,11 +69,4 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:name, :description, :image, :location_id)
     end
 
-    def logged_in
-      if current_user.nil?
-        redirect_to root_path
-        flash[:danger] = "Please log in before continuing."
-      end
-    end
-
 end

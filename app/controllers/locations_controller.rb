@@ -50,11 +50,4 @@ class LocationsController < ApplicationController
     params.require(:location).permit(:name)
   end
 
-  def logged_in
-    if current_user.nil?
-      redirect_to root_path
-      flash[:danger] = "Please log in before continuing."
-    end
-  end
-
 end

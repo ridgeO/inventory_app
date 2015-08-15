@@ -9,6 +9,15 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  def logged_in
+    if current_user.nil?
+      redirect_to root_path
+      flash[:danger] = "Please log in before continuing."
+    end
+  end
+
   helper_method :current_user
+
+  helper_method :logged_in
 
 end
