@@ -1,0 +1,23 @@
+<% if current_user.admin? %>
+<h2>History</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Holder</th>
+      <th>Checkout Date</th>
+      <th>Due Date</th>
+      <th>Days Out</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
+    <tr>
+      <td><%= status.holder %></td>
+      <td><%= status.created_at.to_date.to_s(:long) %></td>
+      <td><%= status.due.to_s(:long) %></td>
+      <td><%= (status.due.to_date - status.created_at.to_date).to_i %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

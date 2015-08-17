@@ -1,59 +1,14 @@
 <%= provide(:title, "#{@item.name}") %>
 <div class="container">
-  <h1><%= @item.name %></h1>
+  <div>
+    <h1><%= @item.name %></h1>
+    <%= render "items/editdeletelinks" %>
+  </div>
   <div class="panel-body">
-    <div>
-      <span><%= image_tag(@item.image, alt: @item.name) if @item.image?%></span>
-    </div>
-    <div>
-      <p>
-        <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
-      </p>
-      <% if current_user.admin? %>
-        <% if Status.where(item_id: @item.id).last.name != "In" %>
-          <p>
-            <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
-          </p>
-          <p>
-            <span><b>Due Date: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
-          </p>
-        <% end %>
-      <% end %>
-      <p>
-        <span><b>Description: </b><%= @item.description %></span>
-      </p>
-    </div>
+    <%= render "items/descriptionbody" %>
   </div>
   <div>
-    <% if current_user.admin? %>
-      <h2>History</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Holder</th>
-            <th>Checkout Date</th>
-            <th>Due Date</th>
-            <th>Days Out</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% Status.where(item_id: @item.id, name: "Out").each do |status| %>
-          <tr>
-            <td><%= status.holder %></td>
-            <td><%= status.created_at.to_date.to_s(:long) %></td>
-            <td><%= status.due.to_s(:long) %></td>
-            <td><%= (status.due.to_date - status.created_at.to_date).to_i %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-      <br>
-      <p>
-        <span><%= link_to "Edit Item", edit_location_item_path(@location.id, @item.id) %></span>
-        <span> | </span>
-        <span><%= link_to "Delete Item", location_item_path(@location.id, @item.id), method: :delete, data: {confirm: "Are you sure you want to delete #{@item.name}?"} %> </span>
-      </p>
-    <% end %>
-    <p><span><%= link_to "Back to Inventory", location_path(@location.id) %></span></p>
+    <%= render "items/historytable" %>
+    <span><%= link_to "Back to Inventory", location_path(@location.id) %></span>
   </div>
 </div>
