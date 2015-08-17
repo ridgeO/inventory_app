@@ -5,6 +5,8 @@ ruby '2.2.1'
 gem 'rails', '4.2.2'
 # Use OmniAuth for authentication
 gem "omniauth-google-oauth2"
+# Use this gem for easy pagination
+gem 'will_paginate', '3.0.5'
 # Use Carrierwave for image upload functionality
 gem 'carrierwave',  '0.10.0'
 # Use MiniMagick to control image size when uploaded

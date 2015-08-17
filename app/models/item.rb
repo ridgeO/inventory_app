@@ -14,6 +14,14 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def self.search(search)
+    if search
+      where("name LIKE ?", "%#{search}%")
+    else
+      all
+    end
+  end
+
   private
   # Validates the size of an uploaded picture
   def image_size

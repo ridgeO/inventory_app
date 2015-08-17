@@ -1,5 +1,11 @@
 <div class="container">
   <h1><%= @location.name %></h1>
+  <%= form_tag location_path(location_id: @location.id), :method => "get" do %>
+    <p>
+      <%= text_field_tag :item_search, params[:item_search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
   <table class="table table-striped">
     <thead>
       <tr>

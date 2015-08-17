@@ -1,6 +1,14 @@
 <%= provide(:title, "Locations") %>
 <div class="container">
   <h1>Locations</h1>
+
+  <%= form_tag locations_path, :method => "get" do %>
+    <p>
+      <%= text_field_tag :location_search, params[:location_search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -23,6 +31,7 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @locations %>
   <% if current_user.super_admin? %>
     <p><%= link_to "+ Add New Location", new_location_path %></p>
   <% end %>

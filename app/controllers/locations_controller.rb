@@ -16,12 +16,12 @@ class LocationsController < ApplicationController
   end
 
   def index
-    @locations = Location.order(name: :asc)
+    @locations = Location.search(params[:location_search]).order(name: :asc).paginate(page: params[:page], :per_page => 10)
   end
 
   def show
     @location = Location.find(params[:id])
-    @items = Item.where(location_id: @location.id)
+    @items = Item.where(location_id: @location.id).search(params[:item_search])
   end
 
   def edit
