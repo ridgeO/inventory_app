@@ -23,7 +23,11 @@
       <% @items.each do |item| %>
       <tr>
         <td><%= link_to item.name, location_item_path(@location.id, item.id)%></td>
-        <td><%= item.description %></td>
+        <% if item.description.length > 25 %>
+          <td><%= item.description[0..25] %>...</td>
+        <% else %>
+          <td><%= item.description %>
+        <% end %>
         <td><%= Status.where(item_id: item.id).last.name %></td>
         <% if current_user.admin? %>
           <td><%= Status.where(item_id: item.id).last.holder %></td>
