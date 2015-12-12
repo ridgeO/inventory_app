@@ -1,0 +1,15 @@
+<h2>Availability</h2>
+<% if @statuses.any? %>
+  <%= month_calendar events: @statuses do |date, statuses| %>
+    <%= date %>
+
+    <% statuses.each do |status| %>
+      <div>
+        <%= status.name %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= month_calendar %>
+<% end %>
+</table>

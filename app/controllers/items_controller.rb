@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   def show
     @location = Location.find(params[:location_id])
     @item = Item.find(params[:id])
+    @statuses = Status.where(item_id: params[:id])
   end
 
   def new

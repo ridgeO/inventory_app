@@ -18,12 +18,22 @@ class StatusesController < ApplicationController
     @status = Status.new
   end
 
+  def req
+    @location = Location.find(params[:location_id])
+    @item = Item.find(params[:item_id])
+    @status = Status.new
+  end
+
   def create
     @status = Status.new(status_params)
     @location = Location.find(params[:location_id])
     @item = Item.find(params[:item_id])
     if @status.save
-      flash[:success] = "#{@item.name} checked out!"
+      if @status.name = "Out"
+        flash[:success] = "#{@item.name} checked out!"
+      elsif @status.name = "Req"
+        flash[:success] = "#{@item.name} requested!"
+      end
       redirect_to location_path(@location)
     else
       render "statuses/checkout"

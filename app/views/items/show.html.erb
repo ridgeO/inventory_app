@@ -2,13 +2,16 @@
 <div class="container">
   <div>
     <h1><%= @item.name %></h1>
-    <%= render "items/editdeletelinks" %>
+    <% if current_user.admin? %>
+      <%= render "items/editdeletelinks" %>
+    <% end %>
   </div>
   <div class="panel-body">
     <%= render "items/descriptionbody" %>
   </div>
   <div>
     <%= render "items/historytable" %>
+    <%= render "items/calendar" %>
     <%= link_to "Back to Inventory", location_path(@location.id) %>
   </div>
 </div>

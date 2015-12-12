@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150802181851) do
     t.integer  "item_id"
     t.string   "name"
     t.string   "holder"
+    t.datetime "start_time"
     t.date     "due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

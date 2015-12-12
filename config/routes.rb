@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :statuses, only: [:create]
       get "checkin" => "statuses#checkin", :as => "checkin"
       get "checkout" => "statuses#checkout", :as => "checkout"
+      get "req" => "statuses#req", :as => "req"
     end
   end
 

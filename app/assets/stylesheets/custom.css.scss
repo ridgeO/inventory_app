@@ -2,8 +2,13 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+.container {
+  text-align: center;
+}
+
 .panel-body {
   display: inline-flex;
+  text-align: center;
 }
 
 .jumbotron {

@@ -36,7 +36,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 # Use Capistrano for deployment
-  # gem 'capistrano-rails', group: :development
+# gem 'capistrano-rails', group: :development
+# Use Simple Calendar for item avail
+gem 'simple_calendar', '~> 2.0'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

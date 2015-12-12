@@ -38,6 +38,8 @@
             <td></td>
             <td><%= link_to "Check Out", location_item_checkout_path(@location.id, item.id) %></td>
           <% end %>
+        <% else %>
+          <td><%= link_to "Request", location_item_req_path(@location.id, item.id) %></td>
         <% end %>
       </tr>
       <% end %>
