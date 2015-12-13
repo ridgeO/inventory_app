@@ -21,6 +21,7 @@ class StatusesController < ApplicationController
   def req
     @location = Location.find(params[:location_id])
     @item = Item.find(params[:item_id])
+    @start_time = params[:start_time]
     @status = Status.new
   end
 
@@ -43,7 +44,7 @@ class StatusesController < ApplicationController
   private
 
   def status_params
-    params.require(:status).permit(:item_id, :name, :holder, :due)
+    params.require(:status).permit(:item_id, :name, :holder, :due, :start_time)
   end
 
 end

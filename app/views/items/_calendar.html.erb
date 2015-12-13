@@ -1,15 +1,11 @@
 <h2>Availability</h2>
-<% if @statuses.any? %>
-  <%= month_calendar events: @statuses do |date, statuses| %>
-    <%= date %>
-
-    <% statuses.each do |status| %>
-      <div>
-        <%= status.name %>
-      </div>
-    <% end %>
+<%= month_calendar events: @statuses do |date, statuses| %>
+  <%= date.strftime("%d") %>
+  <div>
+    <%= link_to "Request", location_item_req_path(@location.id, @item.id, start_time: date) %>
+  </div>
+  <% statuses.each do |status| %>
+    <div> Booked </div>
   <% end %>
-<% else %>
-  <%= month_calendar %>
 <% end %>
 </table>

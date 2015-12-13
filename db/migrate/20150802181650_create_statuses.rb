@@ -5,7 +5,7 @@ class CreateStatuses < ActiveRecord::Migration
       t.integer :item_id
       t.string :name
       t.string :holder
-      t.datetime :start_time
+      t.date :start_time
       t.date :due
       t.timestamps null: false
     end

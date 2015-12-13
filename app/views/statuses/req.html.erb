@@ -8,7 +8,7 @@
         <%= f.label "Your Email Address" %>
         <%= f.text_field :holder, class: 'form-control' %>
         <%= f.label "Request Date" %>
-        <%= f.date_field :start_time, class: 'form-control' %>
+        <%= f.date_field :start_time, :value => @start_time, class: 'form-control' %>
         <%= f.label :due %>
         <%= f.date_field :due, class: 'form-control' %>
         <%= f.hidden_field :item_id, :value => @item.id %>
