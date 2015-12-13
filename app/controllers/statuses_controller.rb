@@ -3,7 +3,7 @@ class StatusesController < ApplicationController
 
   def checkin
     @item = Item.find(params[:item_id])
-    @status = Status.new(item_id: @item.id, name: "In", holder: nil, due: nil)
+    @status = Status.new(item_id: @item.id, name: "In", start_time: Date.today, holder: nil, due: nil)
     if @status.save
       flash[:success] = "#{@item.name} checked in!"
       redirect_to location_path(@item.location_id)
@@ -30,14 +30,18 @@ class StatusesController < ApplicationController
     @location = Location.find(params[:location_id])
     @item = Item.find(params[:item_id])
     if @status.save
-      if @status.name = "Out"
+      if @status.name == "Out"
         flash[:success] = "#{@item.name} checked out!"
-      elsif @status.name = "Req"
+      elsif @status.name == "Req"
         flash[:success] = "#{@item.name} requested!"
       end
       redirect_to location_path(@location)
     else
-      render "statuses/checkout"
+      if @status.name == "Out"
+        render "statuses/checkout"
+      elsif @status.name == "Req"
+        render "statuses/req"
+      end
     end
   end
 

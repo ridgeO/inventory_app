@@ -10,7 +10,6 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Description</th>
         <th>Status</th>
         <% if current_user.admin? %>
           <th>Holder</th>
@@ -21,27 +20,26 @@
     </thead>
     <tbody>
       <% @items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name, location_item_path(@location.id, item.id)%></td>
-        <% if item.description.length > 25 %>
-          <td><%= item.description[0..25] %>...</td>
-        <% else %>
-          <td><%= item.description %>
+        <% @last_in = Status.where("item_id == ?", item.id).where("name == ?", "In").last %>
+        <% if @status = Status.where("item_id == ?", item.id).where("start_time <= ?", Date.today).where("due >= ?", Date.today).where("created_at >= ?", @last_in.created_at).last %>
+        <% else @status = Status.where("item_id == ?", item.id).where("start_time <= ?", Date.today).where("created_at >= ?", @last_in.created_at).last %>
         <% end %>
-        <td><%= Status.where(item_id: item.id).last.name %></td>
-        <% if current_user.admin? %>
-          <td><%= Status.where(item_id: item.id).last.holder %></td>
-          <% unless Status.where(item_id: item.id).last.due.nil? %>
-            <td><%= (Status.where(item_id: item.id).last.due).to_s(:long) %></td>
-            <td><%= link_to "Check In", location_item_checkin_path(@location.id, item.id) %></td>
+        <tr>
+          <td><%= link_to item.name, location_item_path(@location.id, item.id)%></td>
+          <td><%= @status.name %></td>
+          <% if current_user.admin? %>
+            <td><%= @status.holder %></td>
+            <% unless @status.due.nil? %>
+              <td><%= (@status.due).to_s(:long) %></td>
+              <td><%= link_to "Check In", location_item_checkin_path(@location.id, item.id) %></td>
+            <% else %>
+              <td></td>
+              <td><%= link_to "Check Out", location_item_checkout_path(@location.id, item.id) %></td>
+            <% end %>
           <% else %>
-            <td></td>
-            <td><%= link_to "Check Out", location_item_checkout_path(@location.id, item.id) %></td>
+            <td><%= link_to "Request", location_item_req_path(@location.id, item.id) %></td>
           <% end %>
-        <% else %>
-          <td><%= link_to "Request", location_item_req_path(@location.id, item.id) %></td>
-        <% end %>
-      </tr>
+        </tr>
       <% end %>
     </tbody>
   </table>

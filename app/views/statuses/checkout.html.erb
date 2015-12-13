@@ -9,6 +9,7 @@
         <%= f.text_field :holder, class: 'form-control' %>
         <%= f.label :due %>
         <%= f.date_field :due, class: 'form-control' %>
+        <%= f.hidden_field :start_time, :value => Date.today %>
         <%= f.hidden_field :item_id, :value => @item.id %>
         <%= f.hidden_field :name, :value => "Out" %>
         <br>

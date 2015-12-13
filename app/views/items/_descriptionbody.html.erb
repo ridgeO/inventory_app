@@ -2,13 +2,13 @@
   <span><%= image_tag(@item.image, alt: @item.name)%></span>
   <br>
   <br>
-  <span><b>Status: </b><%= "#{Status.where(item_id: @item.id).last.name}" %></span>
+  <span><b>Status: </b><%= "#{@status.name}" %></span>
   <br>
   <% if current_user.admin? %>
-    <% if Status.where(item_id: @item.id).last.name != "In" %>
-        <span><b>Holder: </b><%= "#{Status.where(item_id: @item.id).last.holder}" %></span>
+    <% if @status.name != "In" %>
+        <span><b>Holder: </b><%= "#{@status.holder}" %></span>
         <br>
-        <span><b>Due Date: </b><%= "#{Status.where(item_id: @item.id).last.due.to_s(format= :long)}" %></span>
+        <span><b>Due Date: </b><%= "#{@status.due.to_s(format= :long)}" %></span>
         <br>
     <% end %>
   <% end %>

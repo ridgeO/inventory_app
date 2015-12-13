@@ -1,11 +1,31 @@
 <h2>Availability</h2>
-<%= month_calendar events: @statuses do |date, statuses| %>
+<% @future_statuses.each do |status| %>
+  <% if status.due != nil %>
+    <% @date_range = status.start_time..status.due %>
+    <% @holder = status.holder %>
+  <% end %>
+<%end %>
+<%= month_calendar do |date| %>
   <%= date.strftime("%d") %>
-  <div>
-    <%= link_to "Request", location_item_req_path(@location.id, @item.id, start_time: date) %>
-  </div>
-  <% statuses.each do |status| %>
-    <div> Booked </div>
+  <% if !@date_range.nil? %>
+    <% if @date_range.cover?(date) %>
+      <% if current_user.admin? %>
+        <div>
+          <%= @holder %>
+        </div>
+      <% else %>
+        <div>
+          Booked
+        </div>
+      <% end %>
+    <% else %>
+      <div>
+        <%= link_to "Request", location_item_req_path(@location.id, @item.id, start_time: date) %>
+      </div>
+    <% end %>
+  <% else %>
+    <div>
+      <%= link_to "Request", location_item_req_path(@location.id, @item.id, start_time: date) %>
+    </div>
   <% end %>
 <% end %>
-</table>

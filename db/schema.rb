@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150802181851) do
     t.string   "provider",    null: false
     t.string   "uid",         null: false
     t.string   "name"
+    t.string   "email"
     t.integer  "location_id"
     t.string   "image_url"
     t.boolean  "admin"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150802181851) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   add_index "users", ["provider"], name: "index_users_on_provider"
   add_index "users", ["uid"], name: "index_users_on_uid"

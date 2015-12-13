@@ -9,7 +9,12 @@ class ItemsController < ApplicationController
   def show
     @location = Location.find(params[:location_id])
     @item = Item.find(params[:id])
-    @statuses = Status.where(item_id: params[:id])
+    @last_in = Status.where("item_id == ?", params[:id]).where("name == ?", "In").last
+    @future_statuses = Status.where("item_id == ?", params[:id]).where("name != ?", "In").where("created_at >= ?", @last_in.created_at)
+    @past_statuses = Status.where("item_id == ?", params[:id]).where("name != ?", "In").where("due_date <= ?", @last_in)
+    if @status = Status.where("item_id == ?", @item.id).where("start_time <= ?", Date.today).where("due >= ?", Date.today).where("created_at >= ?", @last_in.created_at).last
+    else @status = Status.where("item_id == ?", @item.id).where("start_time <= ?", Date.today).where("created_at >= ?", @last_in.created_at).last
+    end
   end
 
   def new
